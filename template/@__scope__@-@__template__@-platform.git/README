@@ -1,0 +1,146 @@
+## License
+
+This framework is released under version 2.0 of the [Apache License](http://www.apache.org/licenses/LICENSE-2.0).
+
+联系方式：
+Name： Daniel Cao
+Mail： 19070443@qq.com
+
+说明：
+1，项目名称：@__scope__@-@__template__@-platform
+
+2，导入到开发工具Eclipse或者Idea的方法：
+2.1，方法一，直接用import功能导入；
+2.2，方法二，执行下列步骤后导入Eclipse：
+     cd ./
+     2.2.1.导入本地meaven仓库：mvn clean install -Denv=dev -DskipTests=true
+     2.2.2.导入Eclipse：mvn clean eclipse:clean eclipse:eclipse -Denv=dev -DskipTests=true
+
+3，测试方案
+3.1 跳过单元测试:mvn clean compile -DskipTests=true 或 mvn clean compile
+3.2 运行单元测试:mvn clean compile -DskipTests=false
+
+4，打包发版
+  4.1，打包：mvn clean package -DskipTests=false；
+  4.2，生成包文件在@__scope__@-@__template__@-platform.git/@__scope__@-@__template__@-server/target/@__scope__@-@__template__@-server/下面，
+       有启动脚本bin/single.sh和lib/@__scope__@-@__template__@-release.@__version__@.jar
+  4.3，把target/@__scope__@-@__template__@-server/下的两个目录整体打包发布到服务器；
+  4.4，执行脚本sh ./bin/single.sh  start | stop | restart
+
+4，项目使用说明：
+4.1，环境：jdk要求1.8+，SpringCloud是Finchley.RELEASE，SpringBoot是2.0.3.RELEASE，web模式是servlet，
+     开发环境要求Maven版本是3.5+，开发工具Eclipse建议使用Oxygen.3a Release (4.7.3a)+；
+4.2，项目启动方式：执行com.@__company__@.@__scope__@.@__template__@.app.Main即可；
+4.3，接口访问方式：
+     本地测试：http://localhost:10000/@__scope__@/@__template__@/v1/demo/1?t=1
+     JUnit测试：执行com.@__company__@.@__scope__@.@__template__@.web.TestDemoController即可；
+4.4，打包发布后的@__scope__@-@__template__@-api-@__version__@.jar对外提供接口定义，第三方可使用FeignClient调用；
+4.5，com.@__company__@.@__scope__@.@__template__@.web.support.StringDateConverter提供输入日期时间类型的适配，内部接收
+     属性只需要定义成Date类型，通过接口传入的可以是long类型毫秒或者秒数、yyyy-MM-dd HH:mm:ss、
+     yyyy-MM-dd、yyyy-MM-dd HH:mm、yyyy-MM-dd HH字格式类型的字符串；
+4.6，com.@__company__@.@__scope__@.@__template__@.web.support.ResultExecutor接口，默认提供返回的内部对象T2转化为对外提供
+     的数据对象T1格式，在实现的地方重载T1 resultCast(T2 sre, Class<T1> clazz)即可，默认是T2直接转化为T1；
+4.7，服务注册与发现功能，已经配置，但是默认关闭eureka.client.enabled=false，如需启用改为true即可，并且确保
+     eureka.client.serviceUrl.defaultZone配置正确；
+4.8，统一配置中心：默认启用的是本地配置spring.cloud.config.server.composite.type=native，如需gitlab启用
+    统一配置中心，则只需把native对应的代码段注掉，并且开启type=git配置代码段；
+4.9，本项目服务容器使用的是自带的Tomcat8.5，采用Http1.1的nio模式；
+4.10，第三方接口调用采用FeignClient模式，代码放在@__scope__@-@__template__@-domain内com.@__company__@.@__scope__@.@__template__@.domain.feign包下；
+4.11，数据库配置MyBatis配置在@__scope__@-@__template__@-domain/src/main/resources/bean/mybatis/内，DAO接口定义在
+      com.@__company__@.@__scope__@.@__template__@.domain.dao内，po定义在com.@__company__@.@__scope__@.@__template__@.domain.dao.po内；
+4.12，数据库配置在com.@__company__@.@__scope__@.@__template__@.domain.config.DatasourceConfig内；默认是单数据源配置，可以使用
+      @__scope__@-@__template__@-core工具类开启数据库读写分离配置，只需要在配置文件开启datasource.readwritedivide.enabled=true，
+      同时配置datasource.slaveList从数据库即可，默认采用c3p0数据库连接池配置；
+4.13，redis配置在com.@__company__@.@__scope__@.@__template__@.domain.config.RedisCacheConfig，并且配置redis.xxx代码段；
+4.14，环境上下文类com.@__company__@.@__scope__@.@__template__@.domain.support.ConstantContext，把Spring注入的类放到这里，只需要在使用的地方
+      使用ConstantContext即可，减少大量重复注入代码；
+4.15，日志工具com.@__company__@.@__scope__@.@__template__@.core.common.util.LogModel的使用示例：
+      public foo(int a, String b, Object c){
+          final LogModel lm = LogModel.newLogModel("xxxxxx.foo");
+          lm.addMetaData("a", a);
+          lm.addMetaData("b", b);
+          lm.addMetaData("c", c);
+          writeInfoLog(logger, lm.toJson(false));  //第一次输出,内容保留在内存
+          .....
+          ......
+          lm.addMetaData("d", xxxxx);  //一些中间数据
+          writeInfoLog(logger, lm.toJson(false));  //第n次输出,可以在需要的地方输出,内容保留在内存
+          ......
+          lm.addMetaData("result", xxxxx);
+	  writeInfoLog(logger, lm.toJson()); //最终输出,同时清空内存数据
+          ......
+      }
+4.16，性能监控工具com.@__company__@.@__scope__@.@__template__@.core.common.aop.PerformanceMonitorInterceptor的使用
+      4.16.1，在service层加上切面@ProductCode，如com.@__company__@.@__scope__@.@__template__@.service.DemoService；
+      4.16.2，配置性能监控参数：performframework.xxxx代码段，其中performframework.threshold=50是性能监控阈值，单位是毫秒，
+              也就是监控接口响应时间超过50毫秒即会输出监控结果，可根据需要自行调整该参数大小；
+              performframework.entrance.beanNames是监控入口；performframework.chain.beanNames是监控的中间链；beanNamesExclude
+              是排除无需监控的类；
+      4.16.3，监控结果输出在common-perf.log日之内，结果示例如下：
+              2018-07-19 10:03:13,010 [http-nio-10000-exec-2-9196] INFO  com.beyond.voyager.asia.core.common.aop.PerformanceMonitorInterceptor - [ com.beyond.voyager.xxxx.service.DemoService.queryById 50 (ms) 1475 (ms)
+              0 [1,475ms (29ms), 100%] - Invoking method: com.beyond.voyager.xxxx.service.DemoService.queryById
+              `---11 [1,446ms (49ms), 98%, 98%] - Invoking method: com.beyond.voyager.xxxx.domain.repository.DemoDomainRepository.queryById
+              `---20 [1,397ms, 97%, 95%] - Invoking method: com.beyond.voyager.xxxx.domain.dao.DemoDAO.queryById]
+4.17，Validation校验功能的使用：
+     在Controller类或者需要校验的对象加上@Validated，在@__scope__@-@__template__@-core工具包里定义了若干Group和GroupOrder，具体使用方式可以参数Validation官方文档；
+4.18，Swagger2的使用：
+     在Controller加上Swagger2配置，在com.@__company__@.@__scope__@.@__template__@.web.config.WebMvcConfiguration内可以配置Swagger2相关参数，比如最新接口版本等，具体使用方法参照Swagger2的官方使用文档；
+4.19，@__scope__@-@__template__@-core工具包提供的其他若干有用的工具类：
+      4.19.1，一致性hash工具com.@__company__@.@__scope__@.@__template__@.core.common.hash，给出了一个具体实现MurMurHashFunction；
+      4.19.2，自定义RPC序列化/反序列化工具com.@__company__@.@__scope__@.@__template__@.core.common.serialization,给出了4种实现KryoSerialization、Hessian2Serialization、FastJsonSerialization、JDKSerialization:Java；
+      4.19.3，两个类之间的转化工具com.@__company__@.@__scope__@.@__template__@.core.common.util.ClazzConverter，可以实现任意类之间的转化，但是仅保证同名属性的值能保留；
+      4.19.4，简单编码生成工具com.@__company__@.@__scope__@.@__template__@.core.common.util.CodeGenerator，可以保证单机生成编码不重复；
+      4.19.5，编码/解码加密工具com.@__company__@.@__scope__@.@__template__@.core.common.util.CryptUtil，实现了BASE64、MD5、SHA；
+      4.19.6，LRUMap的一个实现com.@__company__@.@__scope__@.@__template__@.core.common.util.LRUMap；
+      4.19.7，分页工具com.@__company__@.@__scope__@.@__template__@.core.common.util.PaginationSupport；
+4.20，通过配置的swagger线上文档，生成离线文档，支持单一的html文档和pdf文档。
+      命令：mvn clean test -DskipCheckStyle=true -DskipTests=false -Ddockerfile.skip=true
+【End】
+
+【Generator代码自动生成组件使用说明】
+1，功能说明：
+根据定义好xml自动生成的Facade、Controller、Service和Domain，
+其中，Facade、Controller和Service默认无需修改；
+     Domain生成的只一个框架，需要自己填写业务代码。
+2，使用方式：
+2.1，在主pom.xml添加组件
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.6.0</version>
+    <executions>
+        <execution>
+            <id>generator-java</id>
+            <goals>
+                <goal>java</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <skip>${skipGenerator}</skip>
+        <includePluginDependencies>true</includePluginDependencies>
+        <cleanupDaemonThreads>false</cleanupDaemonThreads>
+        <arguments>
+            <argument>dir=${basedir}</argument>
+            <argument>file=/src/generator/facades-define-min.xml</argument>
+        </arguments>
+        <mainClass>com.beyonds.phoenix.mountain.generator.MainGenerator</mainClass>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>com.beyonds.phoenix.mountain</groupId>
+            <artifactId>phoenix-mountain-generator</artifactId>
+            <version>1.0.0.20190115</version>
+        </dependency>
+    </dependencies>
+</plugin>
+2.2，<plugin>中的参数尽量不要修改；
+2.3，定义完毕/xxxxxx-xxxx-server/src/generator/facades-define-min.xml文件后，执行maven命令
+	mvn clean exec:java -DskipGenerator=false
+	即可在对应目录下生成facade、controller、service和domain文件
+	目前暂不支持生成model/bean文件，因为可以借助mybatis generator来生成；
+2.4，facades-define-min.xml是定义文件的最小版；
+     facades-define.xml是定义文件的完整版；
+     generator.xsd是facades-define.xml/facades-define-min.xml校验文件。
+
+

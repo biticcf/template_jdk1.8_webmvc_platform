@@ -1,0 +1,83 @@
+<?xml version="1.0"?> 
+<project name="produceProjects" default="deleteTmp" basedir=".">
+	<property file="build.properties"/>
+	<property name="dest.dir" location="projects"/>
+	<property name="tmp.dir" location="tmps"/>
+	<property name="tmp.dir1" location="tmps1"/>
+  	<property name="src.dir" location="template"/>
+  	<!-- 模板占位符,@token@ -->
+  	<property name="tokenName" value="__template__"/>
+  	<property name="tokenCompany" value="__company__"/>
+  	<property name="tokenVer" value="__version__"/>
+  	<property name="tokenScope" value="__scope__"/>
+  	<!-- 生成的项目名称 -->
+  	<!-- <property name="projectScope" value="sail"/> -->
+  	<!-- <property name="projectName" value="myproj"/> -->
+  	<!-- <property name="projectCompany" value="wanda"/> -->
+  	<!-- <property name="projectVersion" value="20160720"/> -->
+  	
+  	<!-- 如果目标目录不存在,创建之 -->
+  	<target name="makeDir1" unless="${dest.dir}">
+  		<mkdir dir="${dest.dir}" />
+  	</target>
+  	
+  	<!-- 如果临时目录不存在,创建之 -->
+  	<target name="makeDir2" unless="${tmp.dir}">
+  		<mkdir dir="${tmp.dir}" />
+  	</target>
+  	
+  	<target name="makeDir3" unless="${tmp.dir1}">
+  		<mkdir dir="${tmp.dir1}" />
+  	</target>
+  	
+  	<target name="makeDir4" unless="${tmp.dir2}">
+  		<mkdir dir="${tmp.dir2}" />
+  	</target>
+  	
+  	<!-- 删除同名旧项目 -->
+  	<target name="init" depends="makeDir1,makeDir2,makeDir3">
+  		<delete dir="${tmp.dir}/${projectScope}-${projectName}-platform.git" />
+  		<delete dir="${dest.dir}/${projectScope}-${projectName}-platform.git" />
+  		<delete dir="${dest.dir1}/${projectScope}-${projectName}-platform.git" />
+  		<delete dir="${dest.dir2}/${projectScope}-${projectName}-platform.git" />
+  	</target>
+  	
+  	<!-- 根据自定义功能创建task -->
+	<taskdef name="makeProject" 
+	         classname="com.wanda.ant.RenameTask" 
+	         classpath="makeProject.jar">
+	</taskdef>
+	<!-- 使用自定义task-生成临时文件 -->
+	<target name="makeProj1" depends="init">
+		<makeProject  srcDir="${src.dir}" 
+		              destDir="${tmp.dir}" 
+		              token="${tokenName}" 
+		              replacement="${projectName}"/>
+	</target>
+	<target name="makeProj2" depends="makeProj1">
+		<makeProject  srcDir="${tmp.dir}" 
+		              destDir="${tmp.dir1}" 
+		              token="${tokenCompany}" 
+		              replacement="${projectCompany}"/>
+	</target>
+	<target name="makeProj4" depends="makeProj2">
+		<makeProject  srcDir="${tmp.dir1}" 
+		              destDir="${tmp.dir2}" 
+		              token="${tokenScope}" 
+		              replacement="${projectScope}"/>
+	</target>
+	
+	<!-- 使用自定义task-生成最终文件-->
+	<target name="makeProj3" depends="makeProj4">
+		<makeProject  srcDir="${tmp.dir2}" 
+		              destDir="${dest.dir}" 
+		              token="${tokenVer}" 
+		              replacement="${projectVersion}"/>
+	</target>
+	<!-- 删除临时 -->
+  	<target name="deleteTmp" depends="makeProj3">
+  		<delete dir="${tmp.dir}" />
+  		<delete dir="${tmp.dir1}" />
+  		<delete dir="${tmp.dir2}" />
+  	</target>
+</project>
