@@ -84,6 +84,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.beyonds.phoenix.mountain</groupId>
+				<artifactId>phoenix-mountain-generator</artifactId>
+				<version>${phoenix-mountain.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.beyonds.phoenix.mountain</groupId>
 				<artifactId>phoenix-mountain-shackle</artifactId>
 				<version>${phoenix-mountain.version}</version>
 			</dependency>
@@ -330,7 +335,6 @@
     				<dependency>
 						<groupId>com.beyonds.phoenix.mountain</groupId>
 						<artifactId>phoenix-mountain-generator</artifactId>
-						<version>${phoenix-mountain.version}</version>
 					</dependency>
     			</dependencies>
 			</plugin>
