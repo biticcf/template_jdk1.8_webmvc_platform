@@ -38,7 +38,7 @@
 		<!-- 根据Xml接口定义自动生成代码 -->
 		<skipGenerator>true</skipGenerator>
 		<!-- phoenix mountain 核心组件版本号 -->
-		<phoenix-mountain.version>1.0.0.20190304</phoenix-mountain.version>
+		<phoenix-mountain.version>1.0.0.20190309</phoenix-mountain.version>
 		
 		<!-- asm version -->
 		<asm.version>6.1.1</asm.version>
