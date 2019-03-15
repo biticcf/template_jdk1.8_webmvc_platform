@@ -15,6 +15,9 @@ import com.@__company__@.@__scope__@.@__template__@.domain.support.ConstantConte
 import com.@__company__@.@__scope__@.@__template__@.model.DemoModel;
 import com.@__company__@.@__scope__@.@__template__@.model.enums.ResultEnum;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+
 /**
  * @Author: DanielCao
  * @Date:   2017年5月9日
@@ -59,18 +62,13 @@ public class DemoQueryListDomain extends AbstractBaseDomain<PaginationSupport<De
 		} else {
 			offset = limit * (p - 1);
 		}
-		int totalCount = constantContext.getDemoDomainRepository().queryCount();
-		List<DemoModel> resultList;
-		if (totalCount == 0 || offset >= totalCount) {
-			resultList = new ArrayList<>();
-		} else {
-			resultList = constantContext.getDemoDomainRepository().queryList(offset, limit);
-		}
+		
+		Page<DemoModel> page = PageHelper.offsetPage(offset, limit);
+		List<DemoModel> resultList = constantContext.getDemoDomainRepository().queryList();
 		if (resultList == null) {
 			resultList = new ArrayList<>();
 		}
-		
-		PaginationSupport<DemoModel> result = new PaginationSupport<>(resultList, totalCount, limit, (p <= 0 ? 1 : p));
+		PaginationSupport<DemoModel> result = new PaginationSupport<>(resultList, (int) page.getTotal(), page.getPageSize(), page.getPageNum());
 		
 		return WdCallbackResult.success(ResultEnum.SUCCESS.getCode(), result);
 	}
