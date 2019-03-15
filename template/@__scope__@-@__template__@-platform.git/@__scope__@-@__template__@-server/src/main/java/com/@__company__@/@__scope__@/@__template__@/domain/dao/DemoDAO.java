@@ -34,12 +34,6 @@ public interface DemoDAO {
 	List<DemoPo> queryList();
 	
 	/**
-	 * 查询总数
-	 * @return 总数值
-	 */
-	@Select("SELECT count(*) FROM WD_DEMO_INFO")
-	int queryCount();
-	/**
 	 * 保存一条记录
 	 * @param demoPo 数据记录
 	 * @return 保存成功条数
