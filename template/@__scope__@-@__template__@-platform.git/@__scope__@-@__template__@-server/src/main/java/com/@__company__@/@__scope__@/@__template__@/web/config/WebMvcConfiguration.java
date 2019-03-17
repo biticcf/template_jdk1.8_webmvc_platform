@@ -4,12 +4,16 @@
 package com.@__company__@.@__scope__@.@__template__@.web.config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +24,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -41,7 +47,7 @@ import com.beyonds.phoenix.mountain.core.common.service.StringDateConverter;
 public class WebMvcConfiguration implements WebMvcConfigurer {
 	
 	/**
-	 * 定义HttpClient
+	 * +定义HttpClient
 	 * @return HttpClient
 	 */
     @Bean
@@ -51,7 +57,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
     
     /**
-     * 自定义输入的日期格式
+     * +自定义输入的日期格式
      * 覆盖spring.mvc.date-format
      * @return 日期格式转换器
      */
@@ -61,7 +67,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
     
     /**
-     * 支持fastjson的HttpMessageConverter
+     * +支持fastjson的HttpMessageConverter
      * @return HttpMessageConverters
      */
     @Bean
@@ -81,5 +87,44 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         HttpMessageConverter<?> converter = fastJsonHttpMessageConverter;
         
         return new HttpMessageConverters(converter);
+    }
+    
+    /**
+     * +配置druid控制台
+     * @return druid信息
+     */
+    @Bean
+    public ServletRegistrationBean<StatViewServlet> druidServlet() {
+        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>();
+        servletRegistrationBean.setServlet(new StatViewServlet());
+        servletRegistrationBean.addUrlMappings("/druid/*");
+        Map<String, String> initParameters = new HashMap<>();
+        //用户名
+        initParameters.put("loginUsername", "druid");
+        //密码
+        initParameters.put("loginPassword", "test");
+        // 禁用HTML页面上的“Reset All”功能
+        initParameters.put("resetEnable", "false");
+        // IP白名单 (没有配置或者为空，则允许所有访问)
+        initParameters.put("allow", "");
+        // IP黑名单 (存在共同时，deny优先于allow)
+        initParameters.put("deny", "");
+        servletRegistrationBean.setInitParameters(initParameters);
+        
+        return servletRegistrationBean;
+    }
+    
+    /**
+     * +配置参数
+     * @return 参数信息
+     */
+    @Bean
+    public FilterRegistrationBean<WebStatFilter> filterRegistrationBean() {
+        FilterRegistrationBean<WebStatFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new WebStatFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        
+        return filterRegistrationBean;
     }
 }
