@@ -70,7 +70,7 @@ public class DatasourceConfig {
 	 * @return 服务模板
 	 */
 	@Bean(name = "wdServiceTemplate")
-	public WdServiceTemplateImpl wdServiceTemplate(
+	public WdServiceTemplate wdServiceTemplate(
 			@Qualifier("transactionTemplate") TransactionTemplate transactionTemplate) {
 		return new WdServiceTemplateImpl(transactionTemplate);
 	}
