@@ -61,7 +61,7 @@
   <facades>
     <facade>
       <!-- Facade名称前缀,只允许大写字母开头,后面跟小写字母 -->
-      <name>Demo1</name>
+      <name>Deem</name>
     </facade>
   </facades>
 </project>
