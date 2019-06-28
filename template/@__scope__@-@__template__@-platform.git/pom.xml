@@ -41,7 +41,7 @@
 		<!-- 根据Xml接口定义自动生成代码 -->
 		<skipGenerator>true</skipGenerator>
 		<!-- phoenix mountain 核心组件版本号 -->
-		<phoenix-mountain.version>1.0.0.20190605</phoenix-mountain.version>
+		<phoenix-mountain.version>1.0.0.20190628</phoenix-mountain.version>
 		
 		<!-- spring platform -->
 		<spring.boot.version>2.1.5.RELEASE</spring.boot.version>
