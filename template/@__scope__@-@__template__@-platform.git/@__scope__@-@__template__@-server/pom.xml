@@ -231,13 +231,6 @@
         	<groupId>org.springframework.kafka</groupId>
         	<artifactId>spring-kafka</artifactId>
         </dependency>
-        
-        <!-- swagger2docs -->
-        <dependency>
-            <groupId>org.springframework.restdocs</groupId>
-            <artifactId>spring-restdocs-mockmvc</artifactId>
-            <scope>test</scope>
-        </dependency>
 	</dependencies>
 	
 	<build>
