@@ -16,6 +16,7 @@
 	<properties>
 		<skipTests>true</skipTests>
 		<env>dev</env>
+		<profile>default</profile>
 		
 		<build.final.name>@__scope__@-@__template__@-release</build.final.name>
 		
