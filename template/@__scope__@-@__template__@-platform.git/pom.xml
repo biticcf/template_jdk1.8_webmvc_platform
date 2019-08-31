@@ -41,8 +41,8 @@
 		
 		<!-- 根据Xml接口定义自动生成代码 -->
 		<skipGenerator>true</skipGenerator>
-		<!-- phoenix mountain 核心组件版本号 -->
-		<phoenix-mountain.version>1.0.0.20190827</phoenix-mountain.version>
+		<!-- mountain 核心组件版本号 -->
+		<mountain.version>1.0.RELEASE</mountain.version>
 		
 		<!-- spring platform -->
 		<spring.boot.version>2.1.7.RELEASE</spring.boot.version>
@@ -70,19 +70,19 @@
 		<dependencies>
 			<!-- core jars -->
 			<dependency>
-				<groupId>com.beyonds.phoenix.mountain</groupId>
-				<artifactId>phoenix-mountain-core</artifactId>
-				<version>${phoenix-mountain.version}</version>
+				<groupId>com.github.biticcf</groupId>
+				<artifactId>mountain-core</artifactId>
+				<version>${mountain.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.beyonds.phoenix.mountain</groupId>
-				<artifactId>phoenix-mountain-generator</artifactId>
-				<version>${phoenix-mountain.version}</version>
+				<groupId>com.github.biticcf</groupId>
+				<artifactId>mountain-generator</artifactId>
+				<version>${mountain.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.beyonds.phoenix.mountain</groupId>
-				<artifactId>phoenix-mountain-shackle</artifactId>
-				<version>${phoenix-mountain.version}</version>
+				<groupId>com.github.biticcf</groupId>
+				<artifactId>mountain-shackle</artifactId>
+				<version>${mountain.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.@__company__@.@__scope__@.@__template__@</groupId>
@@ -369,12 +369,6 @@
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <systemPropertyVariables>
-                        <io.springfox.staticdocs.outputDir>${swagger.output.dir}</io.springfox.staticdocs.outputDir>
-                        <io.springfox.staticdocs.snippetsOutputDir>${swagger.snippetOutput.dir}</io.springfox.staticdocs.snippetsOutputDir>
-                    </systemPropertyVariables>
-                </configuration>
             </plugin>
             
             <!-- 代码自动生成器(facade/controller/service/domain) -->
@@ -402,24 +396,14 @@
     			</configuration>
     			<dependencies>
     				<dependency>
-						<groupId>com.beyonds.phoenix.mountain</groupId>
-						<artifactId>phoenix-mountain-generator</artifactId>
-						<version>${phoenix-mountain.version}</version>
+						<groupId>com.github.biticcf</groupId>
+						<artifactId>mountain-generator</artifactId>
+						<version>${mountain.version}</version>
 					</dependency>
     			</dependencies>
 			</plugin>
             
 		</plugins>
 	</build>
-	
-	<repositories>
-		<repository>
-			<id>rdc-releases</id>
-			<url>https://repo.rdc.aliyun.com/repository/49339-release-Sz60lB/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	
 </project>
