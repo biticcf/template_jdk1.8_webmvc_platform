@@ -444,9 +444,13 @@
 				</configuration>
 			</plugin>
 			
+			<!-- 需要由git管控此项目才能启用该插件(skip=false),用以展示打包所使用的git版本. -->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
 			
         </plugins>
