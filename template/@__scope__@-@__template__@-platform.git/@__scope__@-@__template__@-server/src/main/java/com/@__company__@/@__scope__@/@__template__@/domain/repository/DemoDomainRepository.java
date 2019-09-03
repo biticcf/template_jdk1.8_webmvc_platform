@@ -9,12 +9,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.beyonds.phoenix.mountain.core.common.util.ClazzConverter;
-import com.beyonds.phoenix.mountain.core.common.util.PaginationSupport;
 import com.@__company__@.@__scope__@.@__template__@.domain.dao.DemoDAO;
 import com.@__company__@.@__scope__@.@__template__@.domain.dao.po.DemoPo;
 import com.@__company__@.@__scope__@.@__template__@.model.DemoModel;
 
+import com.github.biticcf.mountain.core.common.util.ClazzConverter;
+import com.github.biticcf.mountain.core.common.util.PaginationSupport;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 

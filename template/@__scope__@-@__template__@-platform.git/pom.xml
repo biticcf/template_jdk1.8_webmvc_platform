@@ -42,7 +42,7 @@
 		<!-- 根据Xml接口定义自动生成代码 -->
 		<skipGenerator>true</skipGenerator>
 		<!-- mountain 核心组件版本号 -->
-		<mountain.version>1.0.RELEASE</mountain.version>
+		<mountain.version>2.0.RELEASE</mountain.version>
 		
 		<!-- spring platform -->
 		<spring.boot.version>2.1.7.RELEASE</spring.boot.version>
@@ -392,7 +392,7 @@
             			<argument>dir=${basedir}</argument>
             			<argument>file=/src/generator/facades-define.xml</argument>
         			</arguments>
-        			<mainClass>com.beyonds.phoenix.mountain.generator.MainGenerator</mainClass>
+        			<mainClass>com.github.biticcf.mountain.generator.MainGenerator</mainClass>
     			</configuration>
     			<dependencies>
     				<dependency>

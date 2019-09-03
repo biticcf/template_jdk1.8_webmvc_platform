@@ -6,7 +6,7 @@ package com.@__company__@.@__scope__@.@__template__@.domain;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.beyonds.phoenix.mountain.core.common.result.WdCallbackResult;
+import com.github.biticcf.mountain.core.common.result.WdCallbackResult;
 import com.@__company__@.@__scope__@.@__template__@.domain.support.ConstantContext;
 import com.@__company__@.@__scope__@.@__template__@.model.DemoModel;
 import com.@__company__@.@__scope__@.@__template__@.model.enums.ResultEnum;

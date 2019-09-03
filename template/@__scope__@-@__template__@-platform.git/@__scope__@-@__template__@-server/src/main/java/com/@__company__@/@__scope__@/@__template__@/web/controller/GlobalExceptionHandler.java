@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.beyonds.phoenix.mountain.core.common.lang.WdRuntimeException;
-import com.beyonds.phoenix.mountain.core.common.result.ReturnResult;
 import com.@__company__@.@__scope__@.@__template__@.model.enums.ResultEnum;
+
+import com.github.biticcf.mountain.core.common.lang.WdRuntimeException;
+import com.github.biticcf.mountain.core.common.result.ReturnResult;
 
 /**
  * +统一异常处理

@@ -1,16 +1,17 @@
 
 package com.@__company__@.@__scope__@.@__template__@.service;
 
-import com.beyonds.phoenix.mountain.core.common.annotation.ProductCode;
-import com.beyonds.phoenix.mountain.core.common.annotation.ProductLogLevelEnum;
-import com.beyonds.phoenix.mountain.core.common.result.CallResult;
-import com.beyonds.phoenix.mountain.core.common.util.PaginationSupport;
-import com.beyonds.phoenix.mountain.shackle.ShackleDomain;
-import com.beyonds.phoenix.mountain.shackle.ShackleTemplate;
 import com.@__company__@.@__scope__@.@__template__@.domain.DemoInsertDomain;
 import com.@__company__@.@__scope__@.@__template__@.domain.DemoQueryDomain;
 import com.@__company__@.@__scope__@.@__template__@.domain.DemoQueryListDomain;
 import com.@__company__@.@__scope__@.@__template__@.model.DemoModel;
+
+import com.github.biticcf.mountain.core.common.annotation.ProductCode;
+import com.github.biticcf.mountain.core.common.annotation.ProductLogLevelEnum;
+import com.github.biticcf.mountain.core.common.result.CallResult;
+import com.github.biticcf.mountain.core.common.util.PaginationSupport;
+import com.github.biticcf.mountain.shackle.ShackleDomain;
+import com.github.biticcf.mountain.shackle.ShackleTemplate;
 
 /**
  * 

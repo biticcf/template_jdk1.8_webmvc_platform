@@ -6,7 +6,7 @@ package com.@__company__@.@__scope__@.@__template__@.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.beyonds.phoenix.mountain.core.common.util.LogModel;
+import com.github.biticcf.mountain.core.common.util.LogModel;
 
 /**
  * @Author: DanielCao

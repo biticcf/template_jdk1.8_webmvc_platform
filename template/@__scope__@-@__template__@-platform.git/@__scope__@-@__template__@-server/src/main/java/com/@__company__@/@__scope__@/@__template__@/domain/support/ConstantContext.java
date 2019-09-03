@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.beyonds.phoenix.mountain.core.common.service.ReferContext;
 import com.@__company__@.@__scope__@.@__template__@.domain.repository.DemoDomainRepository;
+
+import com.github.biticcf.mountain.core.common.service.ReferContext;
 
 /**
  * @Author: DanielCao

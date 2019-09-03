@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.beyonds.phoenix.mountain.core.common.util.PaginationSupport;
+import com.github.biticcf.mountain.core.common.util.PaginationSupport;
 import com.@__company__@.@__scope__@.@__template__@.model.DemoModel;
 
 /**

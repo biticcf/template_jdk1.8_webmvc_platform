@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.beyonds.phoenix.mountain.core.common.result.ReturnResult;
-import com.beyonds.phoenix.mountain.generator.annotation.FacadeConfig;
-import com.beyonds.phoenix.mountain.generator.annotation.MethodConfig;
+import com.github.biticcf.mountain.core.common.result.ReturnResult;
+import com.github.biticcf.mountain.generator.annotation.FacadeConfig;
+import com.github.biticcf.mountain.generator.annotation.MethodConfig;
 import com.@__company__@.@__scope__@.@__template__@.model.DeemModel;
 
 /**

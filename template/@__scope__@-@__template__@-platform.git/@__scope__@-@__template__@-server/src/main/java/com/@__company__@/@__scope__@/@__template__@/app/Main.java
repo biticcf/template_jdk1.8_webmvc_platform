@@ -10,7 +10,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-import com.beyonds.phoenix.mountain.shackle.EnableShackleTemplates;
+import com.github.biticcf.mountain.shackle.EnableShackleTemplates;
 import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 
 /**
