@@ -11,7 +11,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.github.biticcf.mountain.shackle.EnableShackleTemplates;
-import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 
 /**
  * @Author: DanielCao
@@ -22,7 +21,7 @@ import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
  *     @Configuration+@EnableAutoConfiguration+@ComponentScan
  * 
  */
-@SpringBootApplication(scanBasePackages = {"com.@__company__@.@__scope__@.@__template__@"}, exclude = {PageHelperAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages = {"com.@__company__@.@__scope__@.@__template__@"})
 @EnableFeignClients(basePackages = {"com.@__company__@.@__scope__@.@__template__@.domain.feign"})
 @EnableShackleTemplates(basePackages = {"com.@__company__@.@__scope__@.@__template__@.service"})
 @EnableEurekaClient
