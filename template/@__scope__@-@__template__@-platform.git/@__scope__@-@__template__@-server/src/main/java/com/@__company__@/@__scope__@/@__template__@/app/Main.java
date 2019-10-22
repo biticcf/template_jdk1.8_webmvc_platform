@@ -21,7 +21,7 @@ import com.github.biticcf.mountain.shackle.EnableShackleTemplates;
  *     @Configuration+@EnableAutoConfiguration+@ComponentScan
  * 
  */
-@SpringBootApplication(scanBasePackages = {"com.@__company__@.@__scope__@.@__template__@"})
+@SpringBootApplication(scanBasePackages = {"com.@__company__@.@__scope__@.@__template__@"}, proxyBeanMethods = false)
 @EnableFeignClients(basePackages = {"com.@__company__@.@__scope__@.@__template__@.domain.feign"})
 @EnableShackleTemplates(basePackages = {"com.@__company__@.@__scope__@.@__template__@.service"})
 @EnableEurekaClient
