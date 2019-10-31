@@ -42,7 +42,7 @@
 		<!-- 根据Xml接口定义自动生成代码 -->
 		<skipGenerator>true</skipGenerator>
 		<!-- mountain 核心组件版本号 -->
-		<mountain.version>3.1.RELEASE</mountain.version>
+		<mountain.version>4.0.RELEASE</mountain.version>
 		
 		<!-- spring platform -->
 		<spring.boot.version>2.2.0.RELEASE</spring.boot.version>
@@ -149,6 +149,17 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>1.2.12</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.2.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-jdbc</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             
             <!-- 解决Feign的 application/x-www-form-urlencoded和multipart/form-data类型 -->
