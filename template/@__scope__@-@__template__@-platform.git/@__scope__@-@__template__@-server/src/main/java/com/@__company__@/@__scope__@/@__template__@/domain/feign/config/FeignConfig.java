@@ -20,12 +20,10 @@ import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
 
 import com.@__company__@.@__scope__@.@__template__@.domain.feign.fallback.CategoryFeignClientFallback;
 
 import feign.Client;
-import feign.Feign;
 import feign.Logger;
 import feign.Retryer;
 import feign.codec.Decoder;
@@ -100,24 +98,6 @@ public class FeignConfig {
                 new DefaultGzipDecoder(new SpringDecoder(messageConverters))));
     }
     
-    /**
-     * +定义feign客户端
-     * @param retryer feignRetryer()
-     * @param client feignClient()
-     * @param logger logger()
-     * @param encoder multipartFormEncoder()
-     * @return Feign.Builder
-     */
-    @Bean
-    @Scope("prototype")
-    public Feign.Builder feignBuilder(Retryer retryer, Client client, Logger logger, Encoder encoder) {
-        return Feign.builder()
-                    .retryer(retryer)
-                    .client(client)
-                    .logger(logger)
-                    .encoder(encoder);
-    }
-	
     /**
      * 熔断结果定义
      * @return 熔断结果
