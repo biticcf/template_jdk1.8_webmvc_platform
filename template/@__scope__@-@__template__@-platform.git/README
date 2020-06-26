@@ -157,3 +157,21 @@ password: ${DRUID.PASSWORD:d3hCh7tS8Fy9d0hpZ4AuaRx7tfusY1Db+7TGZeHuDNclWob24eqMg
 connectionProperties: config.decrypt=true;config.decrypt.key=${DRUID.KEY.PUBLIC:MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANY+zqK8LP5rtjJh5eKsv/MMaaPhOsqZ/3H2rcCK625U8NZvyiB75TboNSV+0v/uqB/H5ai84i2nbuRT7QgMQ/0CAwEAAQ==}
 5，如果不想启用druid密文，做反向操作即可
 去掉filters中的config配置；去掉connectionProperties配置项；password改为明文
+
+
+关于分布式事务XA数据源的使用
+1，当使用2个或者2个以上需要启用分布式事务的数据库的时候，建议使用XA事务配置；当有2个或者2个以上数据库但是只有主数据库有事务要求时，不建议启用XA事务配置；
+2，启用XA事务配置的方法如下：
+  2.1，启用属性spring.transaction.xa.enabled=true
+  2.2，transaction.atomikos.*和transaction.jta.*可以根据实际需要调整，也可以保持默认值不变；
+  2.3，datasource.master.url使用jdbc:mysql://前缀，而不能使用jdbc:mysql:replication://前缀，并且useSSL=false而不能是true(如果有认证配置可以启用)；
+  2.4，datasource.master.xa.dataSourceClassName=com.github.biticcf.mountain.core.common.service.MountainDruidXADataSource；
+  2.5，参照datasource.master.*添加datasource.second.*等其他数据源配置文件；
+  2.6，参照com.biti.ccf.study.domain.config.DatasourceConfig添加com.biti.ccf.study.domain.config.DatasourceSecondConfig等其他数据元配置bean。
+3，启用非XA事务的多数据源配置的方法如下：
+  3.1，属性spring.transaction.xa.enabled=false；
+  3.2，忽略ransaction.atomikos.*和transaction.jta.*属性配置；
+  3.3，datasource.master.url可以使用jdbc:mysql:replication://前缀(配置读写分离)，且useSSL可以是true；
+  3.4，datasource.master.xa.dataSourceClassName=com.github.biticcf.mountain.core.common.service.MountainDruidDataSource；
+  3.5，参照datasource.master.*添加datasource.second.*等其他数据源配置文件；
+  3.6，参照com.biti.ccf.study.domain.config.DatasourceConfig添加com.biti.ccf.study.domain.config.DatasourceSecondConfig等其他数据元配置bean。
