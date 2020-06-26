@@ -167,7 +167,10 @@ connectionProperties: config.decrypt=true;config.decrypt.key=${DRUID.KEY.PUBLIC:
   2.3，datasource.master.url使用jdbc:mysql://前缀，而不能使用jdbc:mysql:replication://前缀，并且useSSL=false而不能是true(如果有认证配置可以启用)；
   2.4，datasource.master.xa.dataSourceClassName=com.github.biticcf.mountain.core.common.service.MountainDruidXADataSource；
   2.5，参照datasource.master.*添加datasource.second.*等其他数据源配置文件；
-  2.6，参照com.biti.ccf.study.domain.config.DatasourceConfig添加com.biti.ccf.study.domain.config.DatasourceSecondConfig等其他数据元配置bean。
+  2.6，参照com.biti.ccf.study.domain.config.DatasourceConfig添加com.biti.ccf.study.domain.config.DatasourceSecondConfig等其他数据元配置bean；
+  2.7，需要给数据库账号分配XA RECOVER权限：
+           GRANT XA_RECOVER_ADMIN ON *.* TO `demotest`@`localhost` WITH GRANT OPTION;
+           flush privileges;
 3，启用非XA事务的多数据源配置的方法如下：
   3.1，属性spring.transaction.xa.enabled=false；
   3.2，忽略ransaction.atomikos.*和transaction.jta.*属性配置；
